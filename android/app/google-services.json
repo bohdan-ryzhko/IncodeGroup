@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "830931561147",
+    "project_id": "incode-group-17f35",
+    "storage_bucket": "incode-group-17f35.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830931561147:android:a605addd28890fbbbd979e",
+        "android_client_info": {
+          "package_name": "com.incodegroup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYoQJyDQ6OlufM7OY5c-Iu6CobWyA-M8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
