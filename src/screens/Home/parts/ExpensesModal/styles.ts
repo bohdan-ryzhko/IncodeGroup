@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
+import { ThemeProp } from 'react-native-paper/lib/typescript/types';
 
-export const styles = StyleSheet.create({
-  modalBody: {
-    backgroundColor: 'white',
-    padding: 20,
-    marginHorizontal: 15,
-  },
-});
+export const s = (theme: ThemeProp) =>
+  StyleSheet.create({
+    modalBody: {
+      backgroundColor: theme.colors?.background,
+      padding: 20,
+      marginHorizontal: 15,
+    },
+  });

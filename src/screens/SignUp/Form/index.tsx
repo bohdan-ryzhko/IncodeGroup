@@ -1,4 +1,4 @@
-import { Input } from 'components';
+import { Container, Input } from 'components';
 import { FormikHelpers, useFormik } from 'formik';
 import { UserInfo } from 'interfaces';
 import { FC, useCallback } from 'react';
@@ -37,21 +37,23 @@ export const Form: FC = () => {
   });
 
   return (
-    <View style={styles.container}>
-      <Input
-        formik={formik}
-        name={'email'}
-        label="Email"
-        keyboardType="email-address"
-      />
-      <Input formik={formik} name={'password'} label="Password" isPassword />
-      <Button
-        loading={auth.creating}
-        disabled={auth.creating}
-        mode="contained"
-        onPress={() => formik.handleSubmit()}>
-        Sign Up
-      </Button>
-    </View>
+    <Container>
+      <View style={styles.container}>
+        <Input
+          formik={formik}
+          name={'email'}
+          label="Email"
+          keyboardType="email-address"
+        />
+        <Input formik={formik} name={'password'} label="Password" isPassword />
+        <Button
+          loading={auth.creating}
+          disabled={auth.creating}
+          mode="contained"
+          onPress={() => formik.handleSubmit()}>
+          Sign Up
+        </Button>
+      </View>
+    </Container>
   );
 };

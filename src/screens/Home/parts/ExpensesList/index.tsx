@@ -4,18 +4,19 @@ import {
   Expenses,
   InitialValuesCreateExpenses,
 } from 'interfaces';
+import { FormikHelpers } from 'formik';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { ListRenderItemInfo, TouchableHighlight, View } from 'react-native';
 import { IconButton, Text, useTheme } from 'react-native-paper';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import { deleteExpenses, updateExpenses } from 'store';
+import { updateExpenses } from 'store';
 
 import { DeletedDialog } from './DeletedDialog';
 
-import { s } from './styles';
 import { findExpensesById, removeKeys } from 'utils';
 import { ExpensesModal } from '../ExpensesModal';
-import { FormikHelpers } from 'formik';
+import { s } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 export const sss: InitialValuesCreateExpenses = {
   amount: '',
@@ -28,6 +29,7 @@ export const ExpensesList: FC = () => {
   const { expenses } = useReduxStore();
   const dispatch = useAppDispatch();
   const theme = useTheme();
+  const navigation = useNavigation();
 
   const styles = useMemo(() => s(theme), [theme]);
 
@@ -37,10 +39,21 @@ export const ExpensesList: FC = () => {
   const hideDeletedDialog = () => setDeletedId('');
   const hideUpdateModal = () => setUpdatedId('');
 
+  const list = useMemo(
+    () =>
+      expenses.data.map(item => ({
+        key: item.id,
+        ...item,
+      })),
+    [expenses.data],
+  );
+
   const findExpenses = useCallback(
     (id: string) => findExpensesById(expenses.data, id),
     [expenses.data],
   );
+
+  const foundDeletedExpensesById = findExpenses(deletedId);
 
   const foundUpdatedExpensesById = findExpenses(updatedId);
 
@@ -63,18 +76,6 @@ export const ExpensesList: FC = () => {
     );
   }, [foundUpdatedExpensesById]);
 
-  const handleDeleteExpenses = useCallback(() => {
-    if (!deletedId) {
-      return;
-    }
-
-    const foundExpensesById = findExpenses(deletedId);
-
-    if (foundExpensesById) {
-      dispatch(deleteExpenses(deletedId));
-    }
-  }, [deletedId, dispatch, findExpenses]);
-
   const handleUpdateExpenses = useCallback(
     async (
       payload: CreatePayloadExpenses,
@@ -88,7 +89,7 @@ export const ExpensesList: FC = () => {
         updateExpenses({ id: updatedId, ...payload }),
       ).unwrap();
 
-      if (updatedExpenses.id) {
+      if (updatedExpenses?.id) {
         hideUpdateModal();
         helpers.resetForm();
       }
@@ -96,25 +97,30 @@ export const ExpensesList: FC = () => {
     [dispatch, foundUpdatedExpensesById, updatedId],
   );
 
-  const list = useMemo(
-    () =>
-      expenses.data.map(item => ({
-        key: item.id,
-        ...item,
-      })),
-    [expenses.data],
+  const navigateToExpensesDetails = useCallback(
+    (id: string) => {
+      navigation.navigate('expenses-details', { id });
+    },
+    [navigation],
   );
 
-  const renderItem = (data: ListRenderItemInfo<Expenses>) => (
-    <TouchableHighlight
-      onPress={() => console.log('You touched me')}
-      style={styles.rowFront}
-      underlayColor={'#AAA'}>
-      <View>
-        <Text>{data.item.title}</Text>
-      </View>
-    </TouchableHighlight>
-  );
+  const renderItem = (data: ListRenderItemInfo<Expenses>) => {
+    console.log('data', data);
+    return (
+      <TouchableHighlight
+        onPress={() => navigateToExpensesDetails(data.item.id)}
+        style={[
+          styles.rowFront,
+          data.index === 0 && styles.topItem,
+          data.index === list.length - 1 && styles.bottomItem,
+        ]}
+        underlayColor={theme.colors.onSecondary}>
+        <View>
+          <Text>{data.item.title}</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  };
 
   const renderHiddenItem = (data: ListRenderItemInfo<Expenses>) => {
     return (
@@ -150,7 +156,7 @@ export const ExpensesList: FC = () => {
       <DeletedDialog
         visible={Boolean(deletedId)}
         hideDialog={hideDeletedDialog}
-        onDelete={handleDeleteExpenses}
+        foundExpenses={foundDeletedExpensesById}
       />
 
       {foundUpdatedExpensesById && (

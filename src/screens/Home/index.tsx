@@ -1,35 +1,41 @@
-import { useAppDispatch, useReduxStore } from 'hooks';
-import { FC, useEffect, useMemo } from 'react';
-import { SafeAreaView } from 'react-native';
+import { FC, useEffect } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
-import { getCategories, getExpenses } from 'store';
+import { AlertCurrency } from 'screens';
+import { useReduxStore } from 'hooks';
 
-import { CreateExpenses, ExpensesList } from './parts';
-import { styles } from './styles';
+import { Home } from './Home';
+import { HomeHeader } from './parts';
+
+const RootStack = createStackNavigator();
+
+const header = () => <HomeHeader />;
 
 export const HomeScreen: FC = () => {
-  const { auth } = useReduxStore();
-  const dispatch = useAppDispatch();
-
-  const userId = useMemo(() => auth.user?.uid, [auth.user?.uid]);
+  const { settings } = useReduxStore();
+  const navigation = useNavigation();
 
   useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (!userId) {
+    if (settings.data?.preferredCurrency) {
       return;
     }
 
-    dispatch(getExpenses(userId));
-  }, [dispatch, userId]);
+    navigation.navigate('AlertCurrency');
+  }, [navigation, settings.data?.preferredCurrency]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ExpensesList />
-
-      <CreateExpenses />
-    </SafeAreaView>
+    <RootStack.Navigator screenOptions={{ header }}>
+      <RootStack.Group>
+        <RootStack.Screen name="Home" component={Home} />
+      </RootStack.Group>
+      <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+        <RootStack.Screen
+          name="AlertCurrency"
+          component={AlertCurrency}
+          options={{ headerShown: false }}
+        />
+      </RootStack.Group>
+    </RootStack.Navigator>
   );
 };

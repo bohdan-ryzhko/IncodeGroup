@@ -7,13 +7,22 @@ import { useAppDispatch, useReduxStore } from 'hooks';
 import { createExpenses } from 'store';
 import { FormikHelpers } from 'formik';
 import { ExpensesModal } from '../ExpensesModal';
+import { UnselectedCurrencyAlert } from '../UnselectedCurrencyAlert';
 
 export const CreateExpenses: FC = () => {
-  const { expenses } = useReduxStore();
+  const { expenses, settings } = useReduxStore();
   const dispatch = useAppDispatch();
   const [visible, setVisible] = useState(false);
+  const [visibleAlert, setVisibleAlert] = useState(false);
 
-  const showModal = useCallback(() => setVisible(true), []);
+  const showModal = useCallback(() => {
+    if (settings.data?.preferredCurrency) {
+      setVisible(true);
+    } else {
+      setVisibleAlert(true);
+    }
+  }, [settings.data?.preferredCurrency]);
+
   const hideModal = useCallback(() => setVisible(false), []);
 
   const submit = useCallback(
@@ -39,6 +48,11 @@ export const CreateExpenses: FC = () => {
         hideModal={hideModal}
         submit={submit}
         buttonText="Create"
+      />
+
+      <UnselectedCurrencyAlert
+        visible={visibleAlert}
+        hideDialog={() => setVisibleAlert(false)}
       />
 
       <IconButton

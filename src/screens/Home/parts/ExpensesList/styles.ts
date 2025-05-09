@@ -4,23 +4,27 @@ import { MD3Theme } from 'react-native-paper';
 export const s = (theme: MD3Theme) =>
   StyleSheet.create({
     container: {
-      backgroundColor: 'white',
       flex: 1,
-    },
-    backTextWhite: {
-      color: '#FFF',
+      padding: 15,
     },
     rowFront: {
       alignItems: 'center',
-      backgroundColor: '#CCC',
-      borderBottomColor: 'black',
+      backgroundColor: theme.colors.inverseOnSurface,
       borderBottomWidth: 1,
+      borderBottomColor: theme.colors.inversePrimary,
       justifyContent: 'center',
       height: 50,
     },
+    topItem: {
+      borderTopEndRadius: 8,
+      borderTopStartRadius: 8,
+    },
+    bottomItem: {
+      borderBottomEndRadius: 8,
+      borderBottomStartRadius: 8,
+    },
     rowBack: {
       alignItems: 'center',
-      backgroundColor: '#DDD',
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -44,5 +48,8 @@ export const s = (theme: MD3Theme) =>
     backRightBtnRight: {
       backgroundColor: theme.colors.errorContainer,
       right: 0,
+    },
+    title: {
+      color: theme.colors.surface,
     },
   });

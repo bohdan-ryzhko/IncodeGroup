@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { styles } from './styles';
 import { Button } from 'react-native-paper';
 import { login } from 'store';
-import { Input } from 'components';
+import { Container, Input } from 'components';
 import { useAppDispatch, useReduxStore } from 'hooks';
 
 import { validationSchema } from './validationSchema';
@@ -37,21 +37,23 @@ export const Form: FC = () => {
   });
 
   return (
-    <View style={styles.container}>
-      <Input
-        formik={formik}
-        name={'email'}
-        label="Email"
-        keyboardType="email-address"
-      />
-      <Input formik={formik} name={'password'} label="Password" isPassword />
-      <Button
-        loading={auth.loggingIn}
-        disabled={auth.loggingIn}
-        mode="contained"
-        onPress={() => formik.handleSubmit()}>
-        Login
-      </Button>
-    </View>
+    <Container>
+      <View style={styles.container}>
+        <Input
+          formik={formik}
+          name={'email'}
+          label="Email"
+          keyboardType="email-address"
+        />
+        <Input formik={formik} name={'password'} label="Password" isPassword />
+        <Button
+          loading={auth.loggingIn}
+          disabled={auth.loggingIn}
+          mode="contained"
+          onPress={() => formik.handleSubmit()}>
+          Login
+        </Button>
+      </View>
+    </Container>
   );
 };

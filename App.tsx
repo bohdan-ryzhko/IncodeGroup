@@ -1,11 +1,27 @@
-import React from 'react';
-import { AuthNavigation, HomeNavigation } from 'navigations';
-import { useUser } from 'hooks';
+import React, { useMemo } from 'react';
+import { PaperProvider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { useColorScheme } from 'react-native';
+
+import { CombinedDarkTheme, CombinedDefaultTheme } from 'theme';
+
+import { Main } from 'main';
 
 function App(): React.JSX.Element {
-  const user = useUser();
+  const colorScheme = useColorScheme();
 
-  return user ? <HomeNavigation /> : <AuthNavigation />;
+  const theme = useMemo(
+    () => (colorScheme === 'light' ? CombinedDefaultTheme : CombinedDarkTheme),
+    [colorScheme],
+  );
+
+  return (
+    <PaperProvider theme={theme}>
+      <NavigationContainer theme={theme}>
+        <Main />
+      </NavigationContainer>
+    </PaperProvider>
+  );
 }
 
 export default App;

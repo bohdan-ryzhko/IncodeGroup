@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { Modal, Portal } from 'react-native-paper';
+import { FC, useMemo } from 'react';
+import { Modal, Portal, useTheme } from 'react-native-paper';
 import { ExpensesForm } from '../ExpensesForm';
-import { styles } from './styles';
+import { s } from './styles';
 import { CreatePayloadExpenses, InitialValuesCreateExpenses } from 'interfaces';
 import { FormikHelpers } from 'formik';
 
@@ -25,6 +25,9 @@ export const ExpensesModal: FC<Props> = ({
   existValues,
   buttonText,
 }) => {
+  const theme = useTheme();
+  const styles = useMemo(() => s(theme), [theme]);
+
   return (
     <Portal>
       <Modal

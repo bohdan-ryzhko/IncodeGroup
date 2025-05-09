@@ -40,7 +40,6 @@ const expensesSlice = createSlice({
         state.data.push(action.payload);
       })
       .addCase(getExpenses.fulfilled, (state, action) => {
-        console.log('action', action.payload);
         state.data = action.payload;
       })
       .addCase(updateExpenses.fulfilled, (state, action) => {

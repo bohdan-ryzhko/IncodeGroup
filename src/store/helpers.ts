@@ -12,19 +12,28 @@ type AsyncThunkConfig = {
   fulfillWithValue: <FulfilledValue>(value: FulfilledValue) => FulfilledValue;
 };
 
+type Options = {
+  showNotification?: boolean;
+};
+
 export const ThunkWrapper = <T, U = void>(
   typePrefix: string,
   callback: (arg: U, thunkAPI: GetThunkAPI<AsyncThunkConfig>) => Promise<T>,
+  options?: Options,
 ) => {
   return createAsyncThunk<T, U>(typePrefix, async (arg, thunkAPI) => {
+    const { showNotification = true } = options || {};
     try {
       const response = await callback(arg, thunkAPI);
 
       return response;
     } catch (error: any) {
-      Alert.alert(
-        error.nativeErrorMessage || error.messages || 'Something went wrong',
-      );
+      console.log(error);
+      if (showNotification) {
+        Alert.alert(
+          error.nativeErrorMessage || error.messages || 'Something went wrong',
+        );
+      }
       return thunkAPI.rejectWithValue(error);
     }
   });

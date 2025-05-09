@@ -6,6 +6,5 @@ export const styles = StyleSheet.create({
     gap: 15,
     justifyContent: 'center',
     width: '100%',
-    paddingHorizontal: 15,
   },
 });
