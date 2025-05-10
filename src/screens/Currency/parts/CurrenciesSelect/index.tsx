@@ -6,8 +6,7 @@ import { styles } from './styles';
 import { useAppDispatch, useReduxStore } from 'hooks';
 import { updateSettings } from 'store';
 import { PreferredCurrency, Settings } from 'interfaces';
-
-const DELETE = 'Delete';
+import { DELETE } from 'consts';
 
 type Props = {
   options: string[];

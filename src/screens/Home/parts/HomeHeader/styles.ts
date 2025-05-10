@@ -12,4 +12,8 @@ export const s = (theme: MD3Theme) =>
       borderBottomEndRadius: 16,
       borderBottomStartRadius: 16,
     },
+    inner: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
   });

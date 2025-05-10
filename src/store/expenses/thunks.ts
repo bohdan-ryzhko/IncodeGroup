@@ -17,6 +17,7 @@ import {
   UpdatePayloadExpenses,
 } from 'interfaces';
 import { ThunkWrapper } from 'store/helpers';
+import { sortByDate } from 'utils';
 
 const db = getFirestore();
 
@@ -52,9 +53,7 @@ export const getExpenses = ThunkWrapper<Expenses[], string>(
       ...(document.data() as CreatePayloadExpenses),
     }));
 
-    return [...expenses].sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-    );
+    return sortByDate(expenses) as Expenses[];
   },
 );
 

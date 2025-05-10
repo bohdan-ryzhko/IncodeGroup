@@ -10,8 +10,6 @@ export const SettingsNavList: FC = () => {
   const navigation = useNavigation();
   const theme = useTheme();
 
-  console.log('theme', theme);
-
   const styles = useMemo(() => s(theme), [theme]);
 
   return (

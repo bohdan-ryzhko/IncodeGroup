@@ -49,7 +49,15 @@ export const s = (theme: MD3Theme) =>
       backgroundColor: theme.colors.errorContainer,
       right: 0,
     },
-    title: {
-      color: theme.colors.surface,
+    item: {
+      position: 'relative',
+      width: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    category: {
+      position: 'absolute',
+      marginLeft: 'auto',
+      right: 20,
     },
   });

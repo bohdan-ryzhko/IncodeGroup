@@ -42,8 +42,6 @@ export const initializeSettings = ThunkWrapper<Settings, string>(
 
     const snapshot = await getDoc(ref);
 
-    console.log('snapshot', snapshot);
-
     if (!snapshot.exists()) {
       throw new Error('Settings not found');
     }

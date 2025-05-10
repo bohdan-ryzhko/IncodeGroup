@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   Modal,
   View,
@@ -11,20 +11,20 @@ import { useTheme } from 'react-native-paper';
 
 import { s } from './styles';
 
-type Props = {
+type Props<T extends string> = {
   visible: boolean;
-  onClose: (value: string) => void;
-  options: string[];
-  onConfirm: (value: string) => void;
-} & PickerProps<string>;
+  onClose: (value: T) => void;
+  options: T[];
+  onConfirm: (value: T) => void;
+} & PickerProps<T>;
 
-export const PickerModal: FC<Props> = ({
+export const PickerModal = <T extends string>({
   visible,
   onClose,
   options,
   onConfirm,
   ...props
-}) => {
+}: Props<T>) => {
   const [value, setValue] = useState(options[0]);
   const theme = useTheme();
 

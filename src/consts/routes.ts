@@ -6,6 +6,7 @@ export const routes = {
   home: 'home',
   settings: 'settings',
   currency: 'currency',
+  account: 'account',
 } as const;
 
 export type RoutesType = typeof routes;

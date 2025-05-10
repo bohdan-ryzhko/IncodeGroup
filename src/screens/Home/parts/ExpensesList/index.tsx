@@ -7,25 +7,22 @@ import {
 import { FormikHelpers } from 'formik';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { ListRenderItemInfo, TouchableHighlight, View } from 'react-native';
-import { IconButton, Text, useTheme } from 'react-native-paper';
+import { Chip, IconButton, Text, useTheme } from 'react-native-paper';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { updateExpenses } from 'store';
 
 import { DeletedDialog } from './DeletedDialog';
 
-import { findExpensesById, removeKeys } from 'utils';
+import { findExpensesById, removeKeys, truncate } from 'utils';
 import { ExpensesModal } from '../ExpensesModal';
 import { s } from './styles';
 import { useNavigation } from '@react-navigation/native';
 
-export const sss: InitialValuesCreateExpenses = {
-  amount: '',
-  category: '',
-  date: '',
-  title: '',
+type Props = {
+  computedExpenses: Expenses[];
 };
 
-export const ExpensesList: FC = () => {
+export const ExpensesList: FC<Props> = ({ computedExpenses }) => {
   const { expenses } = useReduxStore();
   const dispatch = useAppDispatch();
   const theme = useTheme();
@@ -41,11 +38,11 @@ export const ExpensesList: FC = () => {
 
   const list = useMemo(
     () =>
-      expenses.data.map(item => ({
+      computedExpenses.map(item => ({
         key: item.id,
         ...item,
       })),
-    [expenses.data],
+    [computedExpenses],
   );
 
   const findExpenses = useCallback(
@@ -57,7 +54,7 @@ export const ExpensesList: FC = () => {
 
   const foundUpdatedExpensesById = findExpenses(updatedId);
 
-  const existValues = useMemo(() => {
+  const existValues: InitialValuesCreateExpenses = useMemo(() => {
     if (!foundUpdatedExpensesById) {
       return {
         amount: '',
@@ -104,23 +101,21 @@ export const ExpensesList: FC = () => {
     [navigation],
   );
 
-  const renderItem = (data: ListRenderItemInfo<Expenses>) => {
-    console.log('data', data);
-    return (
-      <TouchableHighlight
-        onPress={() => navigateToExpensesDetails(data.item.id)}
-        style={[
-          styles.rowFront,
-          data.index === 0 && styles.topItem,
-          data.index === list.length - 1 && styles.bottomItem,
-        ]}
-        underlayColor={theme.colors.onSecondary}>
-        <View>
-          <Text>{data.item.title}</Text>
-        </View>
-      </TouchableHighlight>
-    );
-  };
+  const renderItem = (data: ListRenderItemInfo<Expenses>) => (
+    <TouchableHighlight
+      onPress={() => navigateToExpensesDetails(data.item.id)}
+      style={[
+        styles.rowFront,
+        data.index === 0 && styles.topItem,
+        data.index === list.length - 1 && styles.bottomItem,
+      ]}
+      underlayColor={theme.colors.onSecondary}>
+      <View style={styles.item}>
+        <Text>{data.item.title}</Text>
+        <Chip style={styles.category}>{truncate(data.item.category, 5)}</Chip>
+      </View>
+    </TouchableHighlight>
+  );
 
   const renderHiddenItem = (data: ListRenderItemInfo<Expenses>) => {
     return (

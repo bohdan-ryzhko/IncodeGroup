@@ -5,10 +5,11 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "lint": "eslint .",
+    "lint": "eslint --fix src",
     "start": "react-native start",
     "test": "jest",
-    "pods": "cd ios/ && pod install && cd .."
+    "pods": "cd ios/ && pod install && cd ..",
+    "typecheck": "tsc --noEmit --project tsconfig.json"
   },
   "dependencies": {
     "@react-native-firebase/app": "^22.1.0",

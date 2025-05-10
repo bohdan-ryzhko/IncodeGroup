@@ -4,7 +4,7 @@ import { getCategories } from './thunks';
 
 const initialState: CategoriesStateType = {
   loading: false,
-  data: null,
+  data: [],
   error: null,
 };
 

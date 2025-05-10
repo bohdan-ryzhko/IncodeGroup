@@ -6,6 +6,7 @@ import {
   getExpenses,
   updateExpenses,
 } from './thunks';
+import { sortByDate } from 'utils';
 
 const initialState: ExpensesStateType = {
   fetching: false,
@@ -38,6 +39,7 @@ const expensesSlice = createSlice({
       })
       .addCase(createExpenses.fulfilled, (state, action) => {
         state.data.push(action.payload);
+        state.data = sortByDate(state.data);
       })
       .addCase(getExpenses.fulfilled, (state, action) => {
         state.data = action.payload;

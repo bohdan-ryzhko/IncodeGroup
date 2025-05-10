@@ -1,5 +1,7 @@
+export type Categories = 'Food' | 'Transport' | 'Entertainments';
+
 export type CategoriesStateType = {
   loading: boolean;
-  data: any;
+  data: Categories[];
   error: unknown;
 };
