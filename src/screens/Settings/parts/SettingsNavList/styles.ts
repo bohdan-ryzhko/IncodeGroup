@@ -1,10 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { MD3Theme } from 'react-native-paper/lib/typescript/types';
 
 export const s = (theme: MD3Theme) =>
   StyleSheet.create({
     container: {
-      padding: 15,
+      paddingTop: 15,
+      paddingHorizontal: Platform.OS === 'ios' ? 15 : 0,
     },
     list: {
       backgroundColor: theme.colors.inverseOnSurface,

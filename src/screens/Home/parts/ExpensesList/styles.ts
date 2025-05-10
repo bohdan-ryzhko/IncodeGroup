@@ -48,6 +48,8 @@ export const s = (theme: MD3Theme) =>
     backRightBtnRight: {
       backgroundColor: theme.colors.errorContainer,
       right: 0,
+      borderTopEndRadius: 8,
+      borderBottomEndRadius: 8,
     },
     item: {
       position: 'relative',

@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { ThemeProp } from 'react-native-paper/lib/typescript/types';
+import { MD3Theme } from 'react-native-paper/lib/typescript/types';
 
-export const s = (theme: ThemeProp) =>
+export const s = (theme: MD3Theme) =>
   StyleSheet.create({
     modalBackground: {
       flex: 1,
@@ -9,7 +9,7 @@ export const s = (theme: ThemeProp) =>
       backgroundColor: theme.colors?.backdrop,
     },
     modalContainer: {
-      backgroundColor: '#fff',
+      backgroundColor: theme.colors.background,
       padding: 20,
       borderTopLeftRadius: 16,
       borderTopRightRadius: 16,

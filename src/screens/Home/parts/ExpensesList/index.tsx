@@ -15,8 +15,9 @@ import { DeletedDialog } from './DeletedDialog';
 
 import { findExpensesById, removeKeys, truncate } from 'utils';
 import { ExpensesModal } from '../ExpensesModal';
-import { s } from './styles';
 import { routes } from 'consts';
+
+import { s } from './styles';
 
 type Props = {
   computedExpenses: Expenses[];

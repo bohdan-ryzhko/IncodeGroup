@@ -4,7 +4,7 @@ import { UserInfo } from 'interfaces';
 import { FC, useCallback } from 'react';
 import { View } from 'react-native';
 import { styles } from './styles';
-import { Button } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 import { signUp } from 'store';
 import { useAppDispatch, useReduxStore } from 'hooks';
 
@@ -39,6 +39,9 @@ export const Form: FC = () => {
   return (
     <Container>
       <View style={styles.container}>
+        <Text style={styles.title} variant="titleLarge">
+          Sign Up
+        </Text>
         <Input
           formik={formik}
           name={'email'}

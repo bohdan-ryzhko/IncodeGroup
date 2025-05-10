@@ -1,13 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import {
-  Modal,
-  View,
-  Text,
-  Button,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import { Modal, View, Button, TouchableWithoutFeedback } from 'react-native';
 import { Picker, PickerProps } from '@react-native-picker/picker';
-import { useTheme } from 'react-native-paper';
+import { Text, useTheme } from 'react-native-paper';
 
 import { s } from './styles';
 

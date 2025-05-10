@@ -6,20 +6,24 @@ import {
   TouchableWithoutFeedback,
   SafeAreaView,
   View,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
-
-import { s } from './styles';
 import { useTheme } from 'react-native-paper';
 
-interface Props extends Required<PropsWithChildren> {}
+import { s } from './styles';
 
-export const FeedbackLayout: FC<Props> = ({ children }) => {
+interface Props extends Required<PropsWithChildren> {
+  containerStyle?: StyleProp<ViewStyle>;
+}
+
+export const FeedbackLayout: FC<Props> = ({ children, containerStyle }) => {
   const theme = useTheme();
 
   const styles = useMemo(() => s(theme), [theme]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, containerStyle]}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.innerWrapper}>
           <KeyboardAvoidingView
