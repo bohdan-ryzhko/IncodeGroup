@@ -7,6 +7,7 @@ export const routes = {
   settings: 'settings',
   currency: 'currency',
   account: 'account',
+  expensesDetails: 'expenses-details',
 } as const;
 
 export type RoutesType = typeof routes;

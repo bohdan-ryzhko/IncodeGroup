@@ -1,7 +1,11 @@
 import { Input, PickerDate, PickerModal } from 'components';
 import { FormikHelpers, useFormik } from 'formik';
 import { useReduxStore } from 'hooks';
-import { CreatePayloadExpenses, InitialValuesCreateExpenses } from 'interfaces';
+import {
+  Categories,
+  CreatePayloadExpenses,
+  InitialValuesCreateExpenses,
+} from 'interfaces';
 import React, { FC, useCallback, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { Button, HelperText } from 'react-native-paper';
@@ -52,6 +56,7 @@ export const ExpensesForm: FC<Props> = ({
 
       const payload: CreatePayloadExpenses = {
         ...values,
+        category: values.category as Categories,
         userId,
         amount: Number(values.amount),
       };

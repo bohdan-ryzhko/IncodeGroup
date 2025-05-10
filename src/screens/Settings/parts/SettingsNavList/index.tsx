@@ -1,13 +1,13 @@
 import React, { FC, useMemo } from 'react';
 import { FlatList, View } from 'react-native';
 import { Button, useTheme } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
 
 import { settingsList } from '../settingsList';
 import { s } from './styles';
+import { useHomeNavigation } from 'hooks';
 
 export const SettingsNavList: FC = () => {
-  const navigation = useNavigation();
+  const navigation = useHomeNavigation();
   const theme = useTheme();
 
   const styles = useMemo(() => s(theme), [theme]);

@@ -1,4 +1,4 @@
-import { useAppDispatch, useReduxStore } from 'hooks';
+import { useAppDispatch, useHomeNavigation, useReduxStore } from 'hooks';
 import {
   CreatePayloadExpenses,
   Expenses,
@@ -16,7 +16,7 @@ import { DeletedDialog } from './DeletedDialog';
 import { findExpensesById, removeKeys, truncate } from 'utils';
 import { ExpensesModal } from '../ExpensesModal';
 import { s } from './styles';
-import { useNavigation } from '@react-navigation/native';
+import { routes } from 'consts';
 
 type Props = {
   computedExpenses: Expenses[];
@@ -26,7 +26,7 @@ export const ExpensesList: FC<Props> = ({ computedExpenses }) => {
   const { expenses } = useReduxStore();
   const dispatch = useAppDispatch();
   const theme = useTheme();
-  const navigation = useNavigation();
+  const navigation = useHomeNavigation();
 
   const styles = useMemo(() => s(theme), [theme]);
 
@@ -96,7 +96,7 @@ export const ExpensesList: FC<Props> = ({ computedExpenses }) => {
 
   const navigateToExpensesDetails = useCallback(
     (id: string) => {
-      navigation.navigate('expenses-details', { id });
+      navigation.navigate(routes.expensesDetails, { id });
     },
     [navigation],
   );

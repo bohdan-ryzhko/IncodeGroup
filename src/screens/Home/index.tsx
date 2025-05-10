@@ -1,9 +1,8 @@
 import { FC, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
 
 import { AlertCurrency } from 'screens';
-import { useReduxStore } from 'hooks';
+import { useHomeRootNavigation, useReduxStore } from 'hooks';
 
 import { Home } from './Home';
 import { Platform } from 'react-native';
@@ -12,7 +11,7 @@ const RootStack = createStackNavigator();
 
 export const HomeScreen: FC = () => {
   const { settings } = useReduxStore();
-  const navigation = useNavigation();
+  const navigation = useHomeRootNavigation();
 
   useEffect(() => {
     if (settings.data?.preferredCurrency) {
