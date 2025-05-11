@@ -1,97 +1,123 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Incode Group
 
-# Getting Started
+Expenses management app, created with React Native CLI.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Getting Started
 
-## Step 1: Start Metro
+### Project launch
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
-
-To start the Metro dev server, run the following command from the root of your React Native project:
+> **Install dependencies**:
 
 ```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+npm install
 ```
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
+> **Project start IOS**:
 
 ```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+> **Project start Android**:
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```sh
+npm run android
+```
 
-## Step 3: Modify your app
+# Project Dependencies
 
-Now that you have successfully run the app, let's make changes!
+## UI Components & Styling
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+- **react-native-paper** (`^5.14.0`) - UI library
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## State Management
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+- **@reduxts/toolkit** (`^2.7.0`) - Official Redux toolset for efficient state management
+- **react-redux** (`^9.2.0`) - Official React bindings for Redux
 
-## Congratulations! :tada:
+## Networking
 
-You've successfully run and modified your React Native App. :partying_face:
+- **@react-native-firebase/app** (`^22.1.0`) - JavaScript client library for Firebase
 
-### Now what?
+## Forms & Validation
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+- **formik** (`2.4.6`) - Form management library
+- **yup** (`1.6.1`) - Schema validation library
 
-# Troubleshooting
+## UI Enhancements
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+- **react-native-vector-icons** (`^10.2.0`) - SVG icons for React Native applications
+- **@react-native-vector-icons/material-design-icons** (`^12.0.0`) - Material SVG icons
+- **react-native-date-picker** (`7.0.0`) - Time picker component for React Native
 
-# Learn More
+## Utilities
 
-To learn more about React Native, take a look at the following resources:
+- **dequal** (`2.0.3`) - Fast deep equality comparison
+- **deepmerge** (`2.0.3`) - Merges the enumerable properties of two or more objects deeply
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Development & Build Tools
+
+- **typescript** (`5.0.4`) - Typed JavaScript for large-scale applications
+
+## Project Structure
+
+📦 **src**  
+┣ 📂 **components**  
+┃ ┣ 📂 **ComponentName**  
+┃ ┃ ┣ 📜 `index.tsx` # Main file for the component  
+┃ ┃ ┗ 📜 `styles.ts` # Component styles  
+┃ ┗ 📜 `index.ts` # Re-export file  
+┣ 📂 **constants**  
+┃ ┣ 📜 `constantDataName.ts` # Constants data  
+┃ ┗ 📜 `index.ts` # Re-export file  
+┣ 📂 **hooks**  
+┃ ┣ 📜 `useHookName.ts` # Custom hook  
+┃ ┗ 📜 `index.ts` # Re-export file  
+┣ 📂 **interfaces**  
+┃ ┣ 📜 `interfaceName.ts` # Custom interface name  
+┃ ┗ 📜 `index.ts` # Re-export file  
+┣ 📂 **navigations**  
+┃ ┣ 📂 **NavigationName**  
+┃ ┃ ┣ 📜 `index.tsx` # Main file for the navigation  
+┃ ┃ ┗ 📜 `styles.ts` # Base styles  
+┃ ┗ 📜 `index.ts` # Re-export file  
+┣ 📂 **screens**  
+┃ ┣ 📂 **ScreenName**  
+┃ ┃ ┣ 📂 **parts** # Local directory for specific components on the screen  
+┃ ┃ ┣ 📜 `index.tsx` # Main file for the page  
+┃ ┃ ┗ 📜 `styles.ts` # Styles  
+┣ 📂 **services**  
+┃ ┃ 📜 `serviceName.ts` # Service (business logic)  
+┃ ┗ 📜 `index.ts` # Re-export file  
+┣ 📂 **store**  
+┃ ┣ 📂 **reducerName**  
+┃ ┃ ┣ 📜 `slice.ts` # Slice configuration  
+┃ ┃ ┣ 📜 `thunks.ts` # Thunks/requests/async operations  
+┃ ┃ ┗ 📜 `index.ts` # Re-export file  
+┃ ┃ 📜 `helper.ts` # Redux middleware  
+┃ ┃ 📜 `store.ts` # Store configuration  
+┃ ┗ 📜 `index.ts` # Re-export file  
+┣ 📂 **theme**  
+┃ ┗ 📜 `index.ts` # Theme config/Re-export file  
+┣ 📂 **utils**  
+┃ ┃ 📜 `utilName.ts` # Utility functions  
+┃ ┗ 📜 `index.ts` # Re-export file  
+┣ 📜 `main.ts` # Entry Point App  
+┣ 📜 `index.ts` # Re-export file  
+┗ 📜 `App.tsx` # Root application component
+
+## General Guidelines
+
+- **Use `useReduxStore` for accessing Redux store data**
+
+- **Use `useAppDispatch` for receive redux dispatcher**
+
+- **Use `useMutation` hook for handling asynchronous requests**
+
+- **Also you can use `createAsyncThunk` for handling asynchronous requests**
+
+  - Optionally, you can use `ThunkWrapper` for additional abstraction or custom handling of asynchronous operations, but it's not mandatory.
+
+- **Use Formik for handling forms**
+
+  - In most cases, form handling should be done via the `useFormik` hook.
